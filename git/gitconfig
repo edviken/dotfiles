@@ -1,0 +1,12 @@
+[credential]
+	helper = store
+[user]
+	name = Martin Edviken
+	email = martin_edviken@hotmail.com
+[core]
+	editor = vim
+	excludesfile = /home/edm7rng/.gitignore
+[safe]
+	directory = *
+[include]
+	path = ~/.dotfiles/git/gitconfig_local
