@@ -5,7 +5,7 @@
 	email = martin_edviken@hotmail.com
 [core]
 	editor = vim
-	excludesfile = /home/edm7rng/.gitignore
+	excludesfile = ~/.gitignore
 [safe]
 	directory = *
 [include]
