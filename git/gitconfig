@@ -8,5 +8,9 @@
 	excludesfile = ~/.gitignore
 [safe]
 	directory = *
+[rebase]
+	autosquash = true
 [include]
 	path = ~/.dotfiles/git/gitconfig_local
+[diff]
+	submodule = log

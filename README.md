@@ -1,12 +1,12 @@
 # My dotfiles
 
 ### Installation
-Clone repo to e.g. `~/.dotfiles`
+Clone repo to `~/.dotfiles`
 
 In root dir of this repo, run the following command
 
 *bash*
-```
+```bash
 ./install
 ```
 
