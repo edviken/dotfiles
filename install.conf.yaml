@@ -9,7 +9,9 @@
     # ~/.vim: vim
     ~/.vimrc: ./vim/vimrc
     ~/.gitconfig: ./git/gitconfig
-    ~/.bashrc: ./bash/bashrc
+    ~/.bashrc:  
+        if: '[ -n $(ps -o comm= $$ | grep bash) ]'
+        path: ./bash/bashrc
 
 - create:
     - ~/.vim/undo-history
