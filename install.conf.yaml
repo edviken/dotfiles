@@ -10,8 +10,11 @@
     ~/.vimrc: ./vim/vimrc
     ~/.gitconfig: ./git/gitconfig
     ~/.bashrc:  
-        if: '[ -n $(ps -o comm= $$ | grep bash) ]'
+        if: '[ $(ps -o comm= $$ | grep bash) ]'
         path: ./bash/bashrc
+    ~/.zshrc:
+        if: '[ $(ps -o comm= $$ | grep zsh) ]'
+        path: ./zsh/zshrc
 
 - create:
     - ~/.vim/undo-history

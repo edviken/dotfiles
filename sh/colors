@@ -1,0 +1,21 @@
+# Solarized color palette defined as variables
+#SOLARIZED=XTERM (\033[38;5;{n}m)                 HEX       TERMCOL     USAGE
+#---------                                        -----     -------     -----
+BASE03="$(echo -en "\033[38;5;234m")"             #002b36   brblack     background tone - dark theme
+BASE02="$(echo -en "\033[38;5;235m")"             #073642   black       background tone - dark theme
+BASE01="$(echo -en "\033[38;5;240m")"             #586e75   brgreen     content tone
+BASE00="$(echo -en "\033[38;5;241m")"             #657b83   bryellow    content tone
+BASE0="$(echo -en "\033[38;5;244m")"              #839496   brblue      content tone
+BASE1="$(echo -en "\033[38;5;245m")"              #93a1a1   brcyan      content tone
+BASE2="$(echo -en "\033[38;5;254m")"              #eee8d5   white       background tone - light theme
+BASE3="$(echo -en "\033[38;5;230m")"              #fdf6e3   brwhite     background tone - light theme
+YELLOW="$(echo -en "\033[38;5;136m")"             #b58900   yellow      accent tone
+ORANGE="$(echo -en "\033[38;5;166m")"             #cb4b16   brred       accent tone
+RED="$(echo -en "\033[38;5;160m")"                #dc322f   red         accent tone
+MAGENTA="$(echo -en "\033[38;5;125m")"            #d33682   magenta     accent tone
+VIOLET="$(echo -en "\033[38;5;61m")"              #6c71c4   brmagenta   accent tone
+BLUE="$(echo -en "\033[38;5;33m")"                #268bd2   blue        accent tone
+CYAN="$(echo -en "\033[38;5;37m")"                #2aa198   cyan        accent tone
+GREEN="$(echo -en "\033[38;5;64m")"               #859900   green       accent tone
+
+NC="$(echo -en "\033[0m")"                                # no color
