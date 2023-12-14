@@ -1,0 +1,12 @@
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+ # git prompt configuration
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUPSTREAM="[auto, verbose]"
+GIT_PS1_SHOWCONFLICTSTATE="yes"
+#  GIT_PS1_DESCRIBE_STYLE="contains"
+
+# Show line-number in less (default Ubuntu man page viewer)
+# Drawback: slightly slower load times
+export MANPAGER='less -s -M +Gg'

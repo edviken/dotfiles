@@ -12,6 +12,10 @@
     ~/.bashrc:  
         if: '[ -n $(ps -o comm= $$ | grep bash) ]'
         path: ./bash/bashrc
+    # Might need to configure the - clean a bit differently if I wan to have both .bashrc and .zshrc simoultainously. 
+    # ~/.zshrc:
+    #     if: '[ -n $(ps -o comm= $$ | grep zsh) ]'
+    #     path: ./zsh/zshrc
 
 - create:
     - ~/.vim/undo-history
