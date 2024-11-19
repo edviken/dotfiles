@@ -10,3 +10,20 @@ syntax on " turn on syntax highlighting
 "---------------------
 set relativenumber
 set number
+set showcmd
+
+
+"--------------
+" Screen config
+"--------------
+set laststatus=2     "Make statusline show permanent
+set statusline=
+set statusline+=\ %f "Path to the file
+set statusline+=\ %m "Modified flag 
+set statusline+=%=   "Switch to the right side
+set statusline+=\ %y "Filetype of the file
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c
+set statusline+=\
