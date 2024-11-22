@@ -11,7 +11,9 @@ syntax on " turn on syntax highlighting
 set relativenumber
 set number
 set showcmd
-
+set hlsearch
+set ts=4
+set sw=4
 
 "--------------
 " Screen config
