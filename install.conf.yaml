@@ -13,6 +13,7 @@
     ~/.zshrc:
         if: '[ $(ps -o comm= $$ | grep zsh) ]'
         path: ./zsh/zshrc
+    ~/.tmux.conf: ./tmux/tmux.conf
 
 - create:
     - ~/.vim/undo-history
