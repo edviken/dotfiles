@@ -29,3 +29,6 @@ set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%
 set statusline+=\ %l:%c
 set statusline+=\
+
+" Enable to use mouse scrolling and clicking
+set mouse=a
