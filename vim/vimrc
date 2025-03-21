@@ -15,6 +15,10 @@ set hlsearch
 set ts=4
 set sw=4
 
+" Always center when jumping half-page up/down
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 "--------------
 " Screen config
 "--------------
