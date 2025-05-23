@@ -6,7 +6,7 @@ Clone repo to `~/.dotfiles` by running:
 cd ~ && git clone https://github.com/edviken/dotfiles.git .dotfiles
 ```
 
-In root dir of this repo, run the following command
+In **root dir** of this repo, run the following command
 
 *bash*
 ```bash
