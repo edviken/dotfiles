@@ -14,9 +14,13 @@
         if: '[ $(ps -o comm= $$ | grep zsh) ]'
         path: ./zsh/zshrc
     ~/.tmux.conf: ./tmux/tmux.conf
+    ~/.fzf.bash:
+        if: '[ $(ps -o comm= $$ | grep bash) ]'
+        path: ./.fzf.bash
 
 - create:
     - ~/.vim/undo-history
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [./fzf/install --bin]

@@ -103,6 +103,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# If fzf is available, then use it
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Source local config if it exists
 if [ -f ~/.dotfiles/bash/bashrc_local ]; then
     . ~/.dotfiles/bash/bashrc_local
