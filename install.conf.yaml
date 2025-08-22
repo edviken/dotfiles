@@ -17,6 +17,7 @@
     ~/.fzf.bash:
         if: '[ $(ps -o comm= $$ | grep bash) ]'
         path: ./.fzf.bash
+    ~/.gdbinit: ./.gdbinit
 
 - create:
     - ~/.vim/undo-history
