@@ -36,3 +36,6 @@ set statusline+=\
 
 " Enable to use mouse scrolling and clicking
 set mouse=a
+
+" Show search match count to the bottom right
+set shortmess-=S
