@@ -19,6 +19,10 @@ set sw=4
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
+" Convert tab key to 4 spaces instead. To use real tab 
+" character, press Ctrl-V<Tab> key sequence
+set expandtab
+
 "--------------
 " Screen config
 "--------------
