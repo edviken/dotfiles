@@ -12,5 +12,7 @@
 	autosquash = true
 [diff]
 	submodule = log
+[merge]
+	tool = vimdiff
 [include]
 	path = ~/.dotfiles/git/gitconfig_local
