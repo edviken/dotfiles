@@ -18,6 +18,9 @@
         if: '[ $(ps -o comm= $$ | grep bash) ]'
         path: ./.fzf.bash
     ~/.gdbinit: ./.gdbinit
+    ~/.tmux/plugins/tpm:
+        create: true
+        path: ./external/tpm
 
 - create:
     - ~/.vim/undo-history
