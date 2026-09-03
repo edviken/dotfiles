@@ -21,6 +21,9 @@
     ~/.tmux/plugins/tpm:
         create: true
         path: ./external/tpm
+    ~/.config/base16-shell:
+        create: true
+        path: ./external/base16-shell
 
 - create:
     - ~/.vim/undo-history

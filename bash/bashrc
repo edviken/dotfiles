@@ -106,6 +106,14 @@ export NVM_DIR="$HOME/.nvm"
 # If fzf is available, then use it
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# base16-shell configuration
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+        
+base16_tomorrow-night
+
 # Source local config if it exists
 if [ -f ~/.dotfiles/bash/bashrc_local ]; then
     . ~/.dotfiles/bash/bashrc_local
