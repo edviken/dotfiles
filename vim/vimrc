@@ -44,8 +44,9 @@ set mouse=a
 " Show search match count to the bottom right
 set shortmess-=S
 
-" Set nicer colors in vimdiff then default. TODO: set general vim colorscheme?
-hi DiffAdd ctermfg=253 ctermbg=22 cterm=NONE
-hi DiffChange ctermfg=253 ctermbg=237 cterm=NONE
-hi DiffDelete ctermfg=242 ctermbg=52 cterm=NONE 
-hi DiffText ctermfg=253 ctermbg=23 cterm=NONE
+" base16-vim color scheme
+colorscheme base16-tomorrow-night-eighties
+
+" Turn off background coloring under line-numbers
+" Note: Needs to come after the base16 color-scheme to have effect
+highlight LineNr ctermbg=NONE

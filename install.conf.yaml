@@ -24,6 +24,9 @@
     ~/.config/base16-shell:
         create: true
         path: ./external/base16-shell
+    ~/.vim/colors:
+        create: true
+        path: ./external/base16-vim/colors
 
 - create:
     - ~/.vim/undo-history
