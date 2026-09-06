@@ -5,7 +5,7 @@ on:
     branches: [ "main", "test-pipeline" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   test:
@@ -14,18 +14,25 @@ jobs:
       matrix:
         include:
           - os: macos-latest
-            command: bash
+            command: zsh
           - os: ubuntu-latest
             command: bash
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # For some reason macOS seems to already have a .gitconfig file which makes the ./install
       # step exit with non-zero exitcode.
-      - name: rm gitconfig
-        run: rm -f $HOME/.gitconfig
-      - name: Run Tests
-        run: ${{ matrix.command }} ./test
+      # - name: rm gitconfig
+      #   run: rm -f $HOME/.gitconfig
 
+      - name: Run Tests on macOS
+        if: matrix.os == 'macos-latest'
+        shell: zsh {0}
+        run: rm -f $HOME/.gitconfig && ./test
+
+      - name: Run Tests on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: ./test
