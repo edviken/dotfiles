@@ -17,6 +17,9 @@
     ~/.fzf.bash:
         if: '[ $(ps -o comm= $$ | grep bash) ]'
         path: ./.fzf.bash
+    ~/.fzf.zsh:
+        if: '[ $(ps -o comm= $$ | grep zsh) ]'
+        path: ./.fzf.zsh
     ~/.gdbinit: ./.gdbinit
     ~/.tmux/plugins/tpm:
         create: true

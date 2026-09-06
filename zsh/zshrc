@@ -31,6 +31,9 @@ setopt PROMPT_SUBST
 NEWLINE=$'\n'
 PS1=$'%{$BASE01%}%n@%m %{$BLUE%}%~ %{$YELLOW%}$(__git_ps1 "(%s)")%{$NC%} ${NEWLINE}%f$ '
 
+# If fzf is available, then use it
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
