@@ -5,6 +5,9 @@
 - clean: ['~']
 
 - link:
+    ~/.dotfiles: 
+        if: '[ ! -d "$HOME/.dotfiles" ]'
+        path: ""
     ~/.vimrc: ./vim/vimrc
     ~/.gitconfig: ./git/gitconfig
     ~/.bashrc:  
