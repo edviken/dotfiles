@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/version.conf"
+
+readonly TMUX_VERSION
+readonly RELEASE_BASE_URL="https://github.com/tmux/tmux-builds/releases/download/v${TMUX_VERSION}"
+readonly INSTALL_DIR="${HOME}/.local/bin"
+readonly TMUX_BINARY="${INSTALL_DIR}/tmux"
+
+TMP_DIR=""
+
+log() {
+    printf '[tmux] %s\n' "$*"
+}
+
+die() {
+    printf '[tmux] ERROR: %s\n' "$*" >&2
+    exit 1
+}
+
+cleanup() {
+    if [[ -n "${TMP_DIR}" && -d "${TMP_DIR}" ]]; then
+        rm -rf -- "${TMP_DIR}"
+    fi
+}
+
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+
+require_command() {
+    local command_name="$1"
+
+    command -v "${command_name}" >/dev/null 2>&1 ||
+        die "Required command not found: ${command_name}"
+}
+
+detect_platform() {
+    local os
+    local arch
+
+    os="$(uname -s)"
+    arch="$(uname -m)"
+
+    case "${os}:${arch}" in
+        Linux:x86_64)
+            TMUX_PLATFORM="linux-x86_64"
+            ;;
+
+        Linux:aarch64|Linux:arm64)
+            TMUX_PLATFORM="linux-arm64"
+            ;;
+
+        Darwin:x86_64)
+            TMUX_PLATFORM="macos-x86_64"
+            ;;
+
+        Darwin:arm64)
+            TMUX_PLATFORM="macos-arm64"
+            ;;
+
+        *)
+            die "Unsupported platform: ${os}/${arch}"
+            ;;
+    esac
+}
+
+get_installed_version() {
+    if [[ ! -x "${TMUX_BINARY}" ]]; then
+        return 1
+    fi
+
+    "${TMUX_BINARY}" -V 2>/dev/null |
+        awk '{print $2}'
+}
+
+install_tmux() {
+    local archive
+    local archive_path
+    local extract_dir
+    local downloaded_binary
+    local staged_binary
+    local url
+    local installed_version
+
+    archive="tmux-${TMUX_VERSION}-${TMUX_PLATFORM}.tar.gz"
+    url="${RELEASE_BASE_URL}/${archive}"
+
+    TMP_DIR="$(mktemp -d "${TMPDIR:-/tmp}/tmux-install.XXXXXXXX")"
+
+    archive_path="${TMP_DIR}/${archive}"
+    extract_dir="${TMP_DIR}/extract"
+    downloaded_binary="${extract_dir}/tmux"
+    staged_binary="${INSTALL_DIR}/.tmux.new"
+
+    mkdir -p -- "${extract_dir}"
+    mkdir -p -- "${INSTALL_DIR}"
+
+    log "Downloading tmux ${TMUX_VERSION} for ${TMUX_PLATFORM}"
+
+    curl \
+        --fail \
+        --location \
+        --silent \
+        --show-error \
+        --retry 3 \
+        --retry-delay 2 \
+        --connect-timeout 10 \
+        --output "${archive_path}" \
+        "${url}"
+
+    log "Extracting ${archive}"
+
+    tar \
+        --extract \
+        --gzip \
+        --file "${archive_path}" \
+        --directory "${extract_dir}"
+
+    [[ -f "${downloaded_binary}" ]] ||
+        die "Archive does not contain the expected tmux binary"
+
+    chmod 0755 "${downloaded_binary}"
+
+    # Validate the downloaded binary before touching the installed one.
+    installed_version="$("${downloaded_binary}" -V 2>/dev/null |
+        awk '{print $2}')"
+
+    [[ "${installed_version}" == "${TMUX_VERSION}" ]] ||
+        die "Downloaded tmux reports version '${installed_version}', expected '${TMUX_VERSION}'"
+
+    # Stage the new binary and replace the old one atomically.
+    rm -f -- "${staged_binary}"
+
+    cp -- "${downloaded_binary}" "${staged_binary}"
+    chmod 0755 "${staged_binary}"
+
+    mv -f -- "${staged_binary}" "${TMUX_BINARY}"
+
+    log "Installed tmux ${TMUX_VERSION} -> ${TMUX_BINARY}"
+}
+
+verify_installation() {
+    local actual_version
+
+    actual_version="$(get_installed_version || true)"
+
+    [[ "${actual_version}" == "${TMUX_VERSION}" ]] ||
+        die "Installation verification failed: got '${actual_version}', expected '${TMUX_VERSION}'"
+
+    log "Verified tmux ${actual_version}"
+}
+
+main() {
+    require_command curl
+    require_command tar
+    require_command awk
+
+    detect_platform
+
+    log "Platform: ${TMUX_PLATFORM}"
+    log "Requested version: ${TMUX_VERSION}"
+    log "Install directory: ${INSTALL_DIR}"
+
+    if actual_version="$(get_installed_version)"; then
+        if [[ "${actual_version}" == "${TMUX_VERSION}" ]]; then
+            log "tmux ${TMUX_VERSION} is already installed"
+            exit 0
+        fi
+
+        log "Replacing existing tmux ${actual_version}"
+    fi
+
+    install_tmux
+    verify_installation
+
+    log "tmux installation complete"
+}
+
+main "$@"

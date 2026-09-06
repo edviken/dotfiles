@@ -42,4 +42,9 @@
 
 - shell:
   - [./fzf/install --bin]
+  - 
+    command: ./tmux/install
+    stdout: true
+    stderr: true
+    description: Installing tmux
   - [./external/tpm/bin/install_plugins]

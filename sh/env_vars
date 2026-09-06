@@ -10,3 +10,6 @@ GIT_PS1_SHOWCONFLICTSTATE="yes"
 # Show line-number in less (default Ubuntu man page viewer)
 # Drawback: slightly slower load times
 export MANPAGER='less -s -M +Gg'
+
+# Add to path for locally installed binaries
+export PATH="$PATH:$HOME/.local/bin"
