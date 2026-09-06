@@ -1,0 +1,31 @@
+name: smoke-test
+
+on:
+  push:
+    branches: [ "main", "test-pipeline" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: 
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            command: bash
+          - os: ubuntu-latest
+            command: bash
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # For some reason macOS seems to already have a .gitconfig file which makes the ./install
+      # step exit with non-zero exitcode.
+      - name: rm gitconfig
+        run: rm -f $HOME/.gitconfig
+      - name: Run Tests
+        run: ${{ matrix.command }} ./test
+
