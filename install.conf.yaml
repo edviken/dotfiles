@@ -4,6 +4,9 @@
 
 - clean: ['~']
 
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+
 - link:
     ~/.dotfiles: 
         if: '[ ! -d "$HOME/.dotfiles" ]'
@@ -38,6 +41,5 @@
     - ~/.vim/undo-history
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
   - [./fzf/install --bin]
   - [./external/tpm/bin/install_plugins]
