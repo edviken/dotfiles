@@ -1,0 +1,22 @@
+set -eo pipefail
+
+if [ $(ps -o comm= $$ | grep bash) ]; then
+rm $HOME/.bashrc
+echo "found bash"
+fi
+if [ $(ps -o comm= $$ | grep zsh) ]; then
+rm $HOME/.zshrc
+echo "found zsh"
+fi
+
+echo "Starting installation"
+./install 
+
+echo "[RUN]: test.fzf"
+if [ -x ./fzf/bin/fzf ]; then
+  ./fzf/bin/fzf --version
+else
+  echo "[FAILED]: test.fzf | fzf binary was not installed"
+  exit 1
+fi
+echo "[OK]: test.fzf"
